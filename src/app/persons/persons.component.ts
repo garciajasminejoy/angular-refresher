@@ -1,13 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { PersonsService } from './persons.sevice';
 
 @Component({
     selector: 'app-persons',
     templateUrl: './persons.component.html'
 })
-export class PersonsComponent {
-    @Input() personList: string[];
+export class PersonsComponent implements OnInit {
+    personList: string[];
 
-    constructor() {
-        console.log(this.personList);
+    constructor(private personsService: PersonsService) {
+    }
+
+    ngOnInit(): void {
+        this.personList = this.personsService.persons;
     }
 }
