@@ -9,6 +9,7 @@ import { PersonsService } from './persons.sevice';
 })
 export class PersonsComponent implements OnInit, OnDestroy {
     personList: string[];
+    isFetching = false;
 
     private personListSubs: Subscription;
 
@@ -16,10 +17,12 @@ export class PersonsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.personList = this.personsService.persons;
         this.personListSubs = this.personsService.personsChanged.subscribe(persons => {
             this.personList = persons;
+            this.isFetching = false;
         });
+        this.isFetching = true;
+        this.personsService.fetchPersons();
     }
 
     ngOnDestroy(): void {
