@@ -10,4 +10,8 @@ export class AppComponent {
 
   constructor() {}
 
+  onPersonCreated(name: string): void {
+    this.persons.push(name);
+  }
+
 }
